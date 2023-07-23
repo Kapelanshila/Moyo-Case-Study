@@ -11,16 +11,23 @@
         <h4 class="login">Login</h4>
         <br>
         <br>
-        <div class="inputs">
-            <input type="text" placeholder="Username">
-            <br>
-            <input type="password" placeholder="Password">
-        </div>
-
+        <form [formGroup]="loginform" (ngSubmit)="login()">
+            <div class="inputs">
+                <input  class="form-control" formControlName = "userName"  type="text" placeholder="Username">
+                <div *ngIf="submitted">
+                    <span *ngIf="f['userName'].errors?.['required'] || f['userName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
+                </div>
+                <br>
+                <input class="form-control" formControlName = "password_Hashed"  type="password" placeholder="Password">
+                <div *ngIf="submitted">
+                    <span *ngIf="f['password_Hashed'].errors?.['required'] || f['password_Hashed'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
+                </div>
+            </div>
         <br>
         <br>
         <br>
-        <button>Login</button>
-        </div>
+        <button type="submit">Login</button>
+        </form>
+    </div>
     </div>
 </div>

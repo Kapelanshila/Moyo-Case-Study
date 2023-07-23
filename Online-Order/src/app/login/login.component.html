@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class = "body">
+    <div class="box-form">
+        <div class="left">
+            <div class="overlay">
+                <h1><span style="font-weight:normal; color: rgba(255, 255, 255, 0.874);">Welcome Back.</span></h1>
+                <p>Please enter your login details</p>
+            </div>
+        </div>
+
+        <div class="right">
+        <h4 class="login">Login</h4>
+        <br>
+        <br>
+        <form [formGroup]="loginform" (ngSubmit)="login()">
+            <div class="inputs">
+                <input  class="form-control" formControlName = "userName"  type="text" placeholder="Username">
+                <div *ngIf="submitted">
+                    <span *ngIf="f['userName'].errors?.['required'] || f['userName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
+                </div>
+                <br>
+                <input class="form-control" formControlName = "password_Hashed"  type="password" placeholder="Password">
+                <div *ngIf="submitted">
+                    <span *ngIf="f['password_Hashed'].errors?.['required'] || f['password_Hashed'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
+                </div>
+            </div>
+        <br>
+        <br>
+        <br>
+        <button type="submit">Login</button>
+        </form>
+    </div>
+    </div>
+</div>

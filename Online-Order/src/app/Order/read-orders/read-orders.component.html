@@ -29,15 +29,20 @@
                     <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>Description</th>
-                                <th>Date Placed</th>
+                                <th style="width: 40%;">Description</th>
+                                <th style="width: 40%;">Date Placed</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let orderItem of orderItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
                             <td>{{orderItem.description}}</td>
                             <td>{{orderItem.date | dateconfig}}</td>
                             <td class = "icon-adjust">
-                                <a [routerLink]="" style="cursor: pointer;" class="viewOrder" title="View Order" data-toggle="tooltip"><i class="fa fa-eye" (click)="openPopup()"  aria-hidden="true"></i></a>
+                                <a [routerLink]="" style="cursor: pointer;" class="viewOrder" title="View Order" data-toggle="tooltip">
+                                    <i class="fa fa-eye custom-icon" (click)="openPopup(orderItem)" aria-hidden="true"></i>
+                                  </a>
+                                  <a [routerLink]="" style="cursor: pointer;" class="editOrder" title="Edit" data-toggle="tooltip">
+                                    <i class="fa fa-pen custom-icon" (click)="openPopup(orderItem)" aria-hidden="true"></i>
+                                  </a>
                             </td>  
                         </tr>
                         </tbody>
@@ -70,7 +75,9 @@
             <div class="modal-body">
                 <h6>Products</h6>
                 <br>
-                <br>
+                <ul style="  list-style-type: none;">
+                    <li *ngFor="let product of orderproducts">{{ product.productName }} | Quantity: {{ product.quantity }}</li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" 

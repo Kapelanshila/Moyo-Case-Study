@@ -1,6 +1,6 @@
 export interface Product {
     productID: Number
-    productName: Number 
+    productName: String 
     price: Number
     stock: Number
 }

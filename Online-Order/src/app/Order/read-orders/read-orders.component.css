@@ -7,8 +7,6 @@
     overflow-x: hidden;
     }
 
-
-    
     .table-responsive {
         margin: 5% 0;
         box-shadow: 0 30px 30px rgba(0, 0, 0, 0.292);
@@ -76,8 +74,8 @@
     table.table td a.viewOrder {
         color:#5961f9;
     }
-    table.table td a.delete {
-        color: #E34724;
+    table.table td a.editOrder {
+        color: #353535;
     }
     table.table td i {
         font-size: 19px;
@@ -119,6 +117,8 @@
     transform: translate(0,50%);
     width:100%;
   }
-
+  .custom-icon {
+    font-size: 16px; /* Set the desired font size here */
+  }
 
     

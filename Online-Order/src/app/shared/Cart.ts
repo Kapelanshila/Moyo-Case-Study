@@ -1,6 +1,6 @@
 export interface Cart {
     productID: Number
-    productName: Number 
+    productName: String 
     price: Number
     stock: Number
     quantity: number

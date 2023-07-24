@@ -49,11 +49,11 @@ export class NavigationComponent {
     this.authenticationService.logout();
   }
 
-  clientorder()
+  orders()
   {
-    if(this.account.role == 'Driver')
+    if(this.account.role == 'Client')
     {
-      this.router.navigate(['/completed-orders']);
+      this.router.navigate(['/client-orders']);
     }
     else
     {

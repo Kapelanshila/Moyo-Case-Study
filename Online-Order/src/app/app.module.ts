@@ -13,13 +13,16 @@ import { NavigationComponent } from './navigation/navigation.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
-
+import { ReadOrdersComponent } from './Order/read-orders/read-orders.component';
+import { DatePipe } from './pipes/date.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ClientPortalComponent,
-    NavigationComponent
+    NavigationComponent,
+    ReadOrdersComponent,
+    DatePipe
   ],
   imports: [
     BrowserModule,

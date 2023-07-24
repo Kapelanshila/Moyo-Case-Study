@@ -7,6 +7,7 @@ import { Account } from '../shared/Account';
 import { UserRole } from '../shared/UserRole';
 import { Product } from '../shared/Product';
 import { Cart } from '../shared/Cart';
+import { Order } from '../shared/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,31 @@ export class OMSServicedbService {
   //Searches Product through use of the API
     searchProducts(value:string){
     return this.http.get<any>(environment.apiUrl+'/OMS/SearchProducts?search='+value)
+  }
+
+  //Get Orders
+  readOrders(): Observable<Order[]>{
+    return this.http.get<Order[]>(environment.apiUrl+'/OMS/getOrders')
+  }
+
+  //Get Lines
+  readClientOrderLines(value: string): Observable<Order[]>{
+    return this.http.get<Order[]>(environment.apiUrl+'/OMS/getClientOrderLines?userID='+value)
+  }
+
+    //Search Orderlines
+    searchorderLines(obj:any): Observable<any[]>{
+      return this.http.post<any>(environment.apiUrl+'/OMS/searchOrderLines',obj)
+    }
+
+  //Create Order Lines
+  createOrderLines(obj:any): Observable<any[]>{
+    return this.http.post<any>(environment.apiUrl+'/OMS/createOrderLine',obj)
+  }
+
+  //Update Order Lines
+  updateOrderLines(obj:any): Observable<any[]>{
+    return this.http.put<any>(environment.apiUrl+'/OMS/UpdateOrderLine',obj)
   }
 
 

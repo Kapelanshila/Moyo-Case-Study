@@ -36,7 +36,7 @@
                 </li>
             </ng-container>
             <li class="nav-item d-sm-block d-md-none">
-            <a class="nav-link" routerLink="/backup-restore">Order</a>
+            <a class="nav-link" routerLink="/client-orders">Order</a>
             </li>
             <li class="nav-item d-sm-block d-md-none">
             <a class="nav-link" routerLink="/logout">Logout</a>
@@ -53,9 +53,9 @@
       <ul class="list-group">
         <ng-container *ngIf="account.role == 'Client'">
           <ng-container *ngIf="path != '/client-portal'">
-            <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+            <a  data-toggle="collapse" aria-expanded="false"
               class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"
-              (click)="dashboard()">
+              (click)="orders()">
               <div class="d-flex w-100 justify-content-start align-items-center">
                 <span style="padding-right: 25px;" class="fa fa-shopping-basket fa-fw mr-3"></span>
                 <span class="menu-collapsed">Browse Products</span>
@@ -64,16 +64,16 @@
           </ng-container>
         </ng-container>
 
-        <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+        <a  data-toggle="collapse" aria-expanded="false"
           class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"
-          (click)="dashboard()">
+          (click)="orders()">
           <div class="d-flex w-100 justify-content-start align-items-center">
             <span style="padding-right: 25px;" class="fa fa-shopping-cart fa-fw mr-3"></span>
             <span class="menu-collapsed">Order</span>
           </div>
         </a>
 
-        <a routerLink="/login" (click)="logout()" href="#submenu1" data-toggle="collapse" aria-expanded="false"
+        <a routerLink="/login" (click)="logout()"  data-toggle="collapse" aria-expanded="false"
           class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"
           (click)="isCollapsed = !isCollapsed">
           <div class="d-flex w-100 justify-content-start align-items-center">
@@ -85,5 +85,5 @@
     </div>
   </div>
 </div>
-  </div>
+</div>
   

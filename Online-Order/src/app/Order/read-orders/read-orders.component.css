@@ -121,4 +121,36 @@
     font-size: 16px; /* Set the desired font size here */
   }
 
-    
+  .btn{
+    border: none;
+    margin: 0 13px;
+    margin-top: 1%;
+    color: white;
+    background-color: #5961f9;
+  }
+  .custom-add-button {
+    margin-top: 10px; /* Adjust the top margin as needed */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    padding-left: 0; /* Remove left padding */
+    padding-right: 0; /* Remove right padding */
+  }
+  .btn:hover {
+    background-color: #4046b9;  }
+    .button-container {
+        display: inline-flex;
+        align-items: center;
+        padding: 0;
+      }
+      
+      .custom-add-button {
+        float: left;
+      }
+      
+      .cart-text {
+        font-size: 14px;
+        color: rgb(204, 0, 255);
+        margin-left: 0px;
+        margin-top: 10px;
+      }
+      

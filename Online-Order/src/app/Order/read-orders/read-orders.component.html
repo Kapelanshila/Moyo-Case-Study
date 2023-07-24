@@ -14,6 +14,19 @@
                                     <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchProducts()" [(ngModel)]="query">
                                 </div>
                             </div>
+                            <div class="button-container">
+                                <button style="margin-top: 0;" [disabled]="enabled" class="custom-add-button" style="max-width: 120px;" type="button" class="btn">
+                                  <i class="fa fa-plus"></i> Add New
+                                </button>
+                                <div class="cart-text" *ngIf="countproducts; else emptyCartText">
+                                  Items in Cart
+                                </div>
+                                <ng-template #emptyCartText>
+                                  <div class="cart-text">
+                                    Cart is empty
+                                  </div>
+                                </ng-template>
+                              </div>            
                         </div>
                         <div class="col-md-12 text-nowrap" style="padding: 1%;">
                             <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;

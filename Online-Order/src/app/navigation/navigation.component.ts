@@ -60,4 +60,16 @@ export class NavigationComponent {
       this.router.navigate(['/read-clientorder']);
     }
   }
+
+  products()
+  {
+    if(this.account.role == 'Client')
+    {
+      this.router.navigate(['/client-portal']);
+    }
+    else
+    {
+      this.router.navigate(['/read-clientorder']);
+    }
+  }
 }

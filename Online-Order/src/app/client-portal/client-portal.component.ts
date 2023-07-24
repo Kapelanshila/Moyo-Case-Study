@@ -31,6 +31,8 @@ export class ClientPortalComponent {
   query:string = '';
   ngOnInit(): void 
   {
+    this.pathService.clearPath();
+    this.pathService.setPath('/client-portal');
     this.omsservicedbservice.clearCart();
     //Get asset from api
     this.omsservicedbservice.readProducts()
@@ -148,12 +150,13 @@ export class ClientPortalComponent {
               icon: 'success',
               title: 'Product Added To Cart',
               html:
-              '<p>Item(s) in Cart: '+this.countproducts+'</p>',
+                '<p>Item(s) in Cart: ' + this.countproducts + '</p>' +
+                '<p style="font-size: 14px; color: grey;">Go to orders to checkout</p>',
               confirmButtonText: 'OK',
               confirmButtonColor: '#077bff',
               allowOutsideClick: false,
               allowEscapeKey: false
-              })
+            });
           }
         })          
   }

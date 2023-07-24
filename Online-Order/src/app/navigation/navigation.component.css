@@ -114,4 +114,7 @@
 .OnlineOrder-Nav .sidebar-expanded .list-group-item {
   background: #5961f9;
 }
-
+/* styles.css (or your preferred CSS file) */
+.clickable-link {
+  cursor: pointer; /* Change cursor to a hand pointer on hover */  text-decoration: none; /* Remove underline */
+}

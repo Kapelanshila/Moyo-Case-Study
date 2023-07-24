@@ -37,7 +37,8 @@ export class ReadOrdersComponent {
   product!: Product;
   isPopupOpening = false;
   displayStyle = "none";
-  
+  enabled!:boolean;
+
   constructor(
     public tokenStorageService: TokenStorageService,
     fbuilder: FormBuilder,
@@ -49,9 +50,29 @@ export class ReadOrdersComponent {
   ) {}
 
   ngOnInit(): void {
+    this.pathService.clearPath();
+    this.pathService.setPath('/client-order');
     this.account = this.omsservicedbservice.getAccount();
     this.orderItems = [];
 
+    this.cartItems = this.omsservicedbservice.getCart();
+    if (this.cartItems != null)
+    {
+      this.cartItems.forEach(element => {
+        this.countproducts = this.countproducts + element.quantity;
+      });
+    }
+
+
+    if (this.countproducts != 0)
+    {
+      this.enabled = false;
+    }
+    else
+    {
+      this.enabled = true;
+    }
+    console.log(this.countproducts);
     // Get orderlines from API
     this.omsservicedbservice
       .readClientOrderLines(this.account.userID.toString())

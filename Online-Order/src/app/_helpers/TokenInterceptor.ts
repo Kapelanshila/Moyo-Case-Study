@@ -7,6 +7,7 @@ import { TokenStorageService } from './TokenStorageService';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private tokenStorageService:TokenStorageService) { }
   
+  
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     let tokenizedReq = req.clone({
       setHeaders: {

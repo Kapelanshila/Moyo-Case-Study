@@ -10,6 +10,11 @@ export class TokenStorageService {
     return !!localStorage.getItem('token')
   }
 
+  setToken(value : any)
+  {
+    localStorage.setItem('token',JSON.stringify(value));
+  }
+
   getToken()
   {
     return localStorage.getItem('token');

@@ -14,7 +14,7 @@ export class OMSServicedbService {
   
     //returns employees from API
     readUsers(): Observable<User[]>{
-      return this.http.get<User[]>(environment.apiUrl+'OMS/getUsers')
+      return this.http.get<User[]>(environment.apiUrl+'/OMS/getUsers')
     }
 
       //Get Selected Account

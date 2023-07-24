@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { TokenStorageService } from '../_helpers/TokenStorageService';
 import { Product } from '../shared/Product';
 import { Location } from '@angular/common';
+import { Cart } from '../shared/Cart';
 
 @Component({
   selector: 'app-client-portal',
@@ -20,6 +21,8 @@ export class ClientPortalComponent {
   config: any; 
   noOfRows = 10;
   p: number = 1;
+  cartItems:Cart[] = []; 
+  countproducts = 0;
 
   constructor(public tokenStorageService: TokenStorageService,fbuilder: FormBuilder, private router: Router,private authenticationService:AuthenticationService, private omsservicedbservice:OMSServicedbService , private pathService:PathService, private location:Location)
   {}
@@ -28,10 +31,12 @@ export class ClientPortalComponent {
   query:string = '';
   ngOnInit(): void 
   {
+    this.omsservicedbservice.clearCart();
     //Get asset from api
     this.omsservicedbservice.readProducts()
     .subscribe(response => {
       this.products = response;
+       this.products.filter((product) => product.stock > 0);
         })
   }
 
@@ -63,6 +68,7 @@ export class ClientPortalComponent {
                 this.omsservicedbservice.readProducts()
                 .subscribe(response => {
                   this.products = response;
+                  this.products.filter((product) => product.stock > 0);
                     })
             }
           })  
@@ -86,6 +92,7 @@ export class ClientPortalComponent {
                 this.omsservicedbservice.readProducts()
                 .subscribe(response => {
                   this.products = response;
+                  this.products.filter((product) => product.stock > 0);
                     })
                 }
               })  
@@ -115,9 +122,57 @@ export class ClientPortalComponent {
   
    }
 
-addToCart(selectedProduct:Product)
-{
+  addToCart(selectedProduct:Product)
+  {
+      //Check Stock Levels
+      if (selectedProduct.stock.valueOf() - 1 != 0)
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Product is out of stock',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Are you sure you want add this item to cart?',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.countproducts = 0;
 
-}
+            this.omsservicedbservice.setCart(selectedProduct);
+            this.cartItems = this.omsservicedbservice.getCart();
+
+            this.cartItems.forEach(element => {
+              this.countproducts = this.countproducts + element.quantity;
+            });
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Product Added To Cart',
+              html:
+              '<p>Item(s) in Cart: '+this.countproducts+'</p>',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+              })
+          }
+        })   
+      }       
+  }
 
 }

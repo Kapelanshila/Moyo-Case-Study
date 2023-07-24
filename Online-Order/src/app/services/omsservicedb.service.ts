@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Account } from '../shared/Account';
 import { UserRole } from '../shared/UserRole';
 import { Product } from '../shared/Product';
+import { Cart } from '../shared/Cart';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ import { Product } from '../shared/Product';
 export class OMSServicedbService {
 
   constructor(private http: HttpClient) { }
+  cartItems:Cart[] = [];
+  cartItem!:Cart;
+  newcartItem!:Cart;
 
   //returns employees from API
   readUsers(): Observable<User[]>{
@@ -51,6 +55,40 @@ export class OMSServicedbService {
   clearAccount()
   {
     localStorage.removeItem('Account');
+  } 
+
+  
+  setCart(value: Product) {
+    this.cartItems = JSON.parse(localStorage.getItem('Cart')!) || [];
+  
+    this.cartItem = this.cartItems.find(x => x.productID === value.productID);
+  
+    if (this.cartItem !== undefined) {
+      this.cartItem.quantity++; // Increment the quantity if the product is found
+    } else {
+      this.newcartItem = {
+        productID: value.productID,
+        price: value.price,
+        stock: value.stock,
+        quantity: 1,
+        productName: value.productName,
+      };
+      this.cartItems.push(this.newcartItem);
+    }
+  
+    localStorage.setItem('Cart', JSON.stringify(this.cartItems));
+  }
+
+  //Returns selected Cart
+  getCart()
+  {
+    return JSON.parse(localStorage.getItem('Cart')!);
+  }
+
+  //Clears Cart
+  clearCart()
+  {
+    localStorage.removeItem('Cart');
   } 
 
 

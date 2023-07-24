@@ -9,13 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientPortalComponent } from './client-portal/client-portal.component';
 import { TokenInterceptor } from './_helpers/TokenInterceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ClientPortalComponent
+    ClientPortalComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

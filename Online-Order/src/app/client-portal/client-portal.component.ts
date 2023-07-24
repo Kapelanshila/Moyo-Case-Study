@@ -124,22 +124,6 @@ export class ClientPortalComponent {
 
   addToCart(selectedProduct:Product)
   {
-      //Check Stock Levels
-      if (selectedProduct.stock.valueOf() - 1 != 0)
-      {
-        Swal.fire({
-          icon: 'error',
-          title: 'Product is out of stock',
-          showDenyButton: true,
-          confirmButtonText: 'Yes',
-          denyButtonText: `No`,
-          confirmButtonColor: '#077bff',
-          allowOutsideClick: false,
-          allowEscapeKey: false
-        })
-      }
-      else
-      {
         Swal.fire({
           icon: 'warning',
           title: 'Are you sure you want add this item to cart?',
@@ -171,8 +155,7 @@ export class ClientPortalComponent {
               allowEscapeKey: false
               })
           }
-        })   
-      }       
+        })          
   }
 
 }

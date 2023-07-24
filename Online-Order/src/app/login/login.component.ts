@@ -7,6 +7,8 @@ import { PathService } from '../services/path-service.service';
 import { User } from '../shared/User';
 import Swal from 'sweetalert2';
 import { TokenStorageService } from '../_helpers/TokenStorageService';
+import { Account } from '../shared/Account';
+import { UserRole } from '../shared/UserRole';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +19,11 @@ export class LoginComponent {
   loginform : FormGroup;
   submitted:boolean;
   responsedata: any;
-  account!:User;
+  account!:Account;
+  user!:User;
   users:User[] = [];
+  userRoles:UserRole[] = [];
+  role!:UserRole;
 
   constructor(public tokenStorageService: TokenStorageService,fbuilder: FormBuilder, private router: Router,private authenticationService:AuthenticationService, private omsservicedbservice:OMSServicedbService , private pathService:PathService)
   { 
@@ -47,36 +52,53 @@ export class LoginComponent {
           {
             this.responsedata = result;
             localStorage.setItem('token',this.responsedata);
-            console.log(this.tokenStorageService.getToken());
   
             this.omsservicedbservice.readUsers()
             .subscribe(response => {
               this.users = response;
-        
-              //Gathering account information
-              this.account = this.users.find(x => x.userName == this.loginform.get('userName')?.value)!;
-              this.account =
-              { 
-                userID: this.account.userID,
-                userName : this.account.userName,  
-                password_Hashed: '',
-                userRoleID: this.account.userRoleID,
-              }
-              this.omsservicedbservice.setAccount(this.account);
-              Swal.fire({
-                  icon: 'success',
-                  title: "Logged In",
-                  confirmButtonText: 'OK',
-                  confirmButtonColor: '#077bff',
-                  allowOutsideClick: false,
-                  allowEscapeKey: false
-                  }).then((result) => {
-                  if (result.isConfirmed) {
-                    this.router.navigate(['/client-portal']).then(() => {
-                    window.location.reload();
-                  });
+
+              
+              this.omsservicedbservice.readUserRoles()
+              .subscribe(response => {
+                this.userRoles = response;
+
+                //Gathering account information
+                this.user = this.users.find(x => x.userName == this.loginform.get('userName')?.value)!;
+                this.role = this.userRoles.find(x => x.userRoleID == this.user.userRoleID)!;
+
+
+                this.account =
+                { 
+                  userID: this.user.userID,
+                  userName : this.user.userName,  
+                  password_Hashed: '',
+                  userRoleID: this.user.userRoleID,
+                  role: this.role.description
                 }
-              })  
+                this.omsservicedbservice.setAccount(this.account);
+                Swal.fire({
+                    icon: 'success',
+                    title: "Logged In",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#077bff',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                      //Route to relevant pages based on account type
+                      if (this.account.role == "Client")
+                      {
+                        this.router.navigate(['/client-portal']).then(() => {
+                        });
+                      }
+                      else
+                      {
+                        this.router.navigate(['/oms']).then(() => {
+                        });
+                      }
+                  }
+                })  
+              });
             });
           }
       })

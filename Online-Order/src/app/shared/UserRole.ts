@@ -1,4 +1,4 @@
 export interface UserRole {
-    userRoleID :String 
+    userRoleID :Number 
     description: String
 }

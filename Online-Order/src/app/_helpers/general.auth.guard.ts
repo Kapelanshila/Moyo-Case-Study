@@ -1,12 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { TokenStorageService } from './TokenStorageService';
+
 @Injectable({
   providedIn: 'root'
 })
 class PermissionsService {
-  tokenStorageService: any;
 
-  constructor(private router: Router) {}
+
+  constructor(private router: Router, public tokenStorageService:TokenStorageService) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.tokenStorageService.getToken != undefined)

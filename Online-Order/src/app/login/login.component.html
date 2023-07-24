@@ -15,12 +15,12 @@
             <div class="inputs">
                 <input  class="form-control" formControlName = "userName"  type="text" placeholder="Username">
                 <div *ngIf="submitted">
-                    <span *ngIf="f['userName'].errors?.['required'] || f['userName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
+                    <span style="font-size: small;" *ngIf="f['userName'].errors?.['required'] || f['userName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
                 </div>
                 <br>
                 <input class="form-control" formControlName = "password_Hashed"  type="password" placeholder="Password">
                 <div *ngIf="submitted">
-                    <span *ngIf="f['password_Hashed'].errors?.['required'] || f['password_Hashed'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
+                    <span style="font-size: small;" *ngIf="f['password_Hashed'].errors?.['required'] || f['password_Hashed'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
                 </div>
             </div>
         <br>

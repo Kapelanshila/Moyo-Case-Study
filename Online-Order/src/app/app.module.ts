@@ -10,7 +10,9 @@ import { ClientPortalComponent } from './client-portal/client-portal.component';
 import { TokenInterceptor } from './_helpers/TokenInterceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { NavigationComponent } from './navigation/navigation.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { NavigationComponent } from './navigation/navigation.component';
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   providers: [    
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

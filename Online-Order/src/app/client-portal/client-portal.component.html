@@ -37,14 +37,14 @@
                             <td>{{productItem.productName}}</td>
                             <td>{{productItem.price  | currency:'R '}}</td>
                             <td class = "icon-adjust">
-                                <a [routerLink]="" style="cursor: pointer;" class="view" title="View" data-toggle="tooltip" (click)="addToCart(productItem)"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a [routerLink]="" style="cursor: pointer;" class="addToCart" title="Add To Cart" data-toggle="tooltip" (click)="addToCart(productItem)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                             </td>  
                         </tr>
                         </tbody>
                     </table>
                     <div class="hint-text">Showing <b> {{products.length}}</b> entries</div>
                     <div class="pagination">
-                        <div id="pagination" class="custom-pagination">
+                        <div style="color: 4371C4;" id="pagination" class="custom-pagination">
                             <pagination-controls (pageChange)="p=$event"></pagination-controls>
                         </div>    
                     </div>		

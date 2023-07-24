@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent} from './login/login.component';
 import { ClientPortalComponent } from './client-portal/client-portal.component';
-import { AuthGuard } from './_helpers/general.auth.guard';
+import { clientAuthGuard } from './_helpers/client.auth.guard';
 
 const routes: Routes = [{ path: 'login', component: LoginComponent},
-{ path: 'client-portal', component: ClientPortalComponent,canActivate: [AuthGuard]},
+{ path: 'client-portal', component: ClientPortalComponent, canActivate: [clientAuthGuard] },
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({

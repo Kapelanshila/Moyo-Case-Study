@@ -39,51 +39,61 @@ export class ClientPortalComponent {
   searchProducts()
   { 
     this.products = []
-
-      if (this.query != '' && this.query.replace(/\s/g, '').length == 0 || this.noWhitespaceValidator(this.query))
+      if (this.query == '')
       {
-        Swal.fire({
-          icon: 'error',
-          title: 'Invalid Search',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#077bff',
-          allowOutsideClick: false,
-          allowEscapeKey: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-               //Get asset from api
-              this.omsservicedbservice.readProducts()
-              .subscribe(response => {
-                this.products = response;
-                  })
-          }
-        })  
+        this.omsservicedbservice.readProducts()
+        .subscribe(response => {
+          this.products = response;
+            })
       }
       else
       {
-          this.omsservicedbservice.searchProducts(this.query.toString()).subscribe(response => {
-          this.products = response;
-          if (this.products.length == 0)
-          {
-            Swal.fire({
+        if (this.query.replace(/\s/g, '').length == 0 || this.noWhitespaceValidator(this.query))
+        {
+          Swal.fire({
             icon: 'error',
-            title: 'No Results Found',
+            title: 'Invalid Search',
             confirmButtonText: 'OK',
             confirmButtonColor: '#077bff',
             allowOutsideClick: false,
             allowEscapeKey: false
-            }).then((result) => {
-              if (result.isConfirmed) {
-              //Get asset from api
-              this.omsservicedbservice.readProducts()
-              .subscribe(response => {
-                this.products = response;
-                  })
-              }
-            })  
-          }
-          })
-        }  
+          }).then((result) => {
+            if (result.isConfirmed) {
+                 //Get asset from api
+                this.omsservicedbservice.readProducts()
+                .subscribe(response => {
+                  this.products = response;
+                    })
+            }
+          })  
+        }
+        else
+        {
+            this.omsservicedbservice.searchProducts(this.query.toString()).subscribe(response => {
+            this.products = response;
+            if (this.products.length == 0)
+            {
+              Swal.fire({
+              icon: 'error',
+              title: 'No Results Found',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+              }).then((result) => {
+                if (result.isConfirmed) {
+                //Get asset from api
+                this.omsservicedbservice.readProducts()
+                .subscribe(response => {
+                  this.products = response;
+                    })
+                }
+              })  
+            }
+            })
+          }  
+      }
+      
 }
 
      //Check no white spaces

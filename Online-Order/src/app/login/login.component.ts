@@ -88,6 +88,8 @@ export class LoginComponent {
                       //Route to relevant pages based on account type
                       if (this.account.role == "Client")
                       {
+                        this.pathService.clearRequest();
+                        this.pathService.setPath('/client-portal');
                         this.router.navigate(['/client-portal']).then(() => {
                         });
                       }

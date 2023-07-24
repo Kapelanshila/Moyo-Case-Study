@@ -1,1 +1,89 @@
-<p>navigation works!</p>
+<!-- Smaller Screen Navbar HTML Code -->
+<div class="OnlineOrder-Nav">
+    <nav class="navbar navbar-dark ">
+      <button class="navbar-toggler navbar-dark" type="button" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation">
+        <i class="fa fa-bars fa-lg" aria-hidden="true" style="color: white;"></i>
+      </button>
+
+      <ng-container *ngIf="account.role == 'Client'">
+        <a class="navbar-brand mx-auto" href="#">
+            <h3 style="font-weight: normal; margin-right: 3vw;">Client Portal</h3>
+        </a>
+    </ng-container>
+
+    <ng-container *ngIf="account.role == 'Vendor'">
+        <a class="navbar-brand mx-auto" href="#">
+            <h3 style="font-weight: normal; margin-right: 3vw;">Order Managment System</h3>
+        </a>
+    </ng-container>
+
+    <div style="padding-right: 0.5%;" class="navbar navbar-expand-sm justify-content-between">
+        <ul class="navbar-nav">
+          <li style="cursor: pointer;" class="nav-item active">
+            <i (click)="back()" class="fa fa-chevron-circle-left fa-2x mr-2" aria-hidden="true" style="color: white;"></i>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Collapsible content for the navbar -->
+    <div class="collapse navbar-collapse" id="sidebar" [ngbCollapse]="isCollapsed">
+        <ul class="navbar-nav">
+        <ng-container *ngIf="account.role == 'Client'">
+            <ng-container *ngIf="path != '/client-portal'">
+                <li class="nav-item d-sm-block d-md-none">
+                    <a class="nav-link" routerLink="/read-user">Browse Products</a>
+                </li>
+            </ng-container>
+            <li class="nav-item d-sm-block d-md-none">
+            <a class="nav-link" routerLink="/backup-restore">Order</a>
+            </li>
+            <li class="nav-item d-sm-block d-md-none">
+            <a class="nav-link" routerLink="/logout">Logout</a>
+            </li>
+        </ng-container>
+        </ul>
+    </div>
+</nav>
+  
+<!-- Fullscreen Navbar HTML Code -->
+<div class="collapse navbar-collapse large-collapse" id="sidebar" [ngbCollapse]="isCollapsed">
+  <div class="row" id="body-row">
+    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block  shadow">
+      <ul class="list-group">
+        <ng-container *ngIf="account.role == 'Client'">
+          <ng-container *ngIf="path != '/client-portal'">
+            <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+              class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"
+              (click)="dashboard()">
+              <div class="d-flex w-100 justify-content-start align-items-center">
+                <span style="padding-right: 25px;" class="fa fa-shopping-basket fa-fw mr-3"></span>
+                <span class="menu-collapsed">Browse Products</span>
+              </div>
+            </a>
+          </ng-container>
+        </ng-container>
+
+        <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+          class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"
+          (click)="dashboard()">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span style="padding-right: 25px;" class="fa fa-shopping-cart fa-fw mr-3"></span>
+            <span class="menu-collapsed">Order</span>
+          </div>
+        </a>
+
+        <a routerLink="/login" (click)="logout()" href="#submenu1" data-toggle="collapse" aria-expanded="false"
+          class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"
+          (click)="isCollapsed = !isCollapsed">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span style="padding-right: 25px;" class="fa fa-sign-out-alt fa-fw mr-3"></span>
+            <span class="menu-collapsed">Logout</span>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
+  </div>
+  

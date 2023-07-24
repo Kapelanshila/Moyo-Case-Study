@@ -1,0 +1,9 @@
+.body{
+    font-family: 'Verdana';
+    background: linear-gradient(#CFFDBC,#CFFDBC);
+    background-size: cover;
+    height: 100%;
+    width:100%;
+    position: absolute;
+    overflow-x: hidden;
+    }

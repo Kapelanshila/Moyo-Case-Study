@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../shared/User';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Account } from '../shared/Account';
+import { UserRole } from '../shared/UserRole';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +13,18 @@ export class OMSServicedbService {
 
   constructor(private http: HttpClient) { }
 
-  
-    //returns employees from API
-    readUsers(): Observable<User[]>{
-      return this.http.get<User[]>(environment.apiUrl+'/OMS/getUsers')
-    }
+  //returns employees from API
+  readUsers(): Observable<User[]>{
+    return this.http.get<User[]>(environment.apiUrl+'/OMS/getUsers')
+  }
 
-      //Get Selected Account
-  setAccount(value : User)
+  readUserRoles(): Observable<UserRole[]>{
+    return this.http.get<UserRole[]>(environment.apiUrl+'/OMS/getUserRoles')
+  }
+
+
+  //Get Selected Account
+  setAccount(value : Account)
   {
     localStorage.setItem('Account',JSON.stringify(value));
   }

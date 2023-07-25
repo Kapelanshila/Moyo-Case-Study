@@ -21,6 +21,7 @@ import { UpdateOrderComponent } from './Order/update-order/update-order.componen
 import { CreateProductComponent } from './Product/create-product/create-product.component';
 import { UpdateProductComponent } from './Product/update-product/update-product.component';
 import { ReadProductComponent } from './Product/read-product/read-product.component';
+import { VendorOrdersComponent } from './Order/vendor-orders/vendor-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { ReadProductComponent } from './Product/read-product/read-product.compon
     TimePipe,
     CreateProductComponent,
     UpdateProductComponent,
-    ReadProductComponent
+    ReadProductComponent,
+    VendorOrdersComponent
   ],
   imports: [
     BrowserModule,

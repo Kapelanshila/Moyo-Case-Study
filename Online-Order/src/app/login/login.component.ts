@@ -95,7 +95,7 @@ export class LoginComponent {
                       }
                       else
                       {
-                        this.router.navigate(['/oms']).then(() => {
+                        this.router.navigate(['/read-products']).then(() => {
                         });
                       }
                   }

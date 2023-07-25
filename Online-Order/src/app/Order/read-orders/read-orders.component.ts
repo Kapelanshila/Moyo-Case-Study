@@ -13,6 +13,7 @@ import { SearchOrderVM } from 'src/app/shared/SearchOrderVM';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 import { ProductVM } from 'src/app/shared/ProductVM';
+import { Order } from 'src/app/shared/Order';
 
 @Component({
   selector: 'app-read-orders',
@@ -108,6 +109,14 @@ export class ReadOrdersComponent {
     });
   }
 
+  editOrder(selectedorder:OrderVM)
+  {
+    this.omsservicedbservice.clearOrder();
+    this.omsservicedbservice.setOrder(selectedorder);
+    this.router.navigate(['/update-orders']).then(() => {
+    });
+  }
+
   // Modal Open and Close Functions
   openPopup(selectedOrder: OrderVM) {
     if (!this.isPopupOpening) {
@@ -130,6 +139,7 @@ export class ReadOrdersComponent {
                   orderID: element.orderID,
                   quantity: element.quantity,
                   productName: this.product.productName,
+                  price:0,
                 };
     
                 // Add the orderproduct to the Set

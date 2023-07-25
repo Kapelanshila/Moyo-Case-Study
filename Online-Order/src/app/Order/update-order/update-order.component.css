@@ -1,0 +1,76 @@
+.body{
+    background: linear-gradient(#CFFDBC,#CFFDBC);
+    background-size: cover;
+    height: 100%;
+    width:100%;
+    position: absolute;
+    overflow-x: hidden;
+    }
+
+.order-card {
+  max-width: 70%;
+  padding: 20px 30px;
+  margin: 0 auto 25px;
+  margin-top: 75px;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.292);
+  background: #fff;
+  box-shadow: 0 3px 6px 1px #042d4657;
+  border-radius: 10px;
+}
+
+.order-card .reauth-email {
+  display: block;
+  color: #404040;
+  line-height: 2;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+
+.order-card label {
+  color: #000000;
+}
+
+.order-card .form-order .form-control:focus {
+  border-color: #3F70CA;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #3F70CA;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #3F70CA;
+}
+
+.order-card .btn.btn-order:hover, .order-card .btn.btn-order:active, .order-card .btn.btn-order:focus {
+  background: #031F60;
+}
+
+.btn-primary{
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+br {
+  display: block;
+  content: ""; 
+  margin-top: 15px; 
+}
+
+section{
+  height:100vh;
+  width: 100%;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ background-attachment: fixed;
+}
+.error
+{
+  color: red;
+}
+
+table.table td a.removeFromCart {
+    color: #E34724;
+}

@@ -3,4 +3,5 @@ export interface ProductVM {
     orderID: Number 
     quantity: Number
     productName: String 
+    price: Number
 }

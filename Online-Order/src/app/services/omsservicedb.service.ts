@@ -9,6 +9,7 @@ import { Product } from '../shared/Product';
 import { Cart } from '../shared/Cart';
 import { Order } from '../shared/Order';
 import { ProductVM } from '../shared/ProductVM';
+import { OrderVM } from '../shared/OrderVM';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,11 @@ export class OMSServicedbService {
   //Update Order Lines
   updateOrderLines(obj:any): Observable<any[]>{
     return this.http.put<any>(environment.apiUrl+'/OMS/UpdateOrderLine',obj)
+  }
+
+  //Delete Product Order Lines
+  deleteProductOrderLines(obj:any): Observable<any[]>{
+    return this.http.post<any>(environment.apiUrl+'/OMS/deleteOrderProduct',obj)
   }
 
 
@@ -151,6 +157,25 @@ export class OMSServicedbService {
   {
     localStorage.removeItem('Cart');
   } 
+
+    //Get Selected Order so it can be either updated or deleted
+    setOrder(value : OrderVM)
+    {
+     localStorage.setItem('Order',JSON.stringify(value));
+   }
+ 
+    //Returns selected Order so it can be used on potentially other pages
+    getOrder()
+    {
+     return JSON.parse(localStorage.getItem('Order')!);
+   }
+ 
+    //Clears Order value so it ready to read again
+    clearOrder()
+    {
+     localStorage.removeItem('Order');
+   } 
+ 
 
 
 }

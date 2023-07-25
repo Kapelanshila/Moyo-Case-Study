@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReadOrdersComponent } from './Order/read-orders/read-orders.component';
 import { DatePipe } from './pipes/date.pipe';
 import { CreateOrdersComponent } from './Order/create-orders/create-orders.component';
+import { UpdateOrderComponent } from './Order/update-order/update-order.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { CreateOrdersComponent } from './Order/create-orders/create-orders.compo
     NavigationComponent,
     ReadOrdersComponent,
     DatePipe,
-    CreateOrdersComponent
+    CreateOrdersComponent,
+    UpdateOrderComponent
   ],
   imports: [
     BrowserModule,

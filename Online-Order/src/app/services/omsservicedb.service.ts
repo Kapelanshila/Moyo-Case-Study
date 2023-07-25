@@ -178,9 +178,12 @@ export class OMSServicedbService {
 
 
   //Get Lines
-  readClientProducts(value: string): Observable<Order[]>{
-    return this.http.get<Order[]>(environment.apiUrl+'/OMS/getClientProducts?userID='+value)
+
+  //Get Orders
+  readOrderLines(): Observable<Order[]>{
+    return this.http.get<Order[]>(environment.apiUrl+'/OMS/getOrderLines')
   }
+
 
   //Create Order Lines
   createProducts(obj:any): Observable<any[]>{
@@ -189,16 +192,16 @@ export class OMSServicedbService {
 
   //Update Order Lines
   updateProducts(obj:any): Observable<any[]>{
-    return this.http.put<any>(environment.apiUrl+'/OMS/updateProduct',obj)
+    return this.http.post<any>(environment.apiUrl+'/OMS/updateProduct',obj)
   }
 
   //Delete Product Order Lines
-  deleteProductProducts(obj:any): Observable<any[]>{
-    return this.http.post<any>(environment.apiUrl+'/OMS/deleteOrderProduct',obj)
+  deleteProduct(obj:any): Observable<any[]>{
+    return this.http.post<any>(environment.apiUrl+'/OMS/deleteProduct',obj)
   }
    
     //Get Selected Product so it can be either updated or deleted
-    setProduct(value : ProductVM)
+    setProduct(value : Product)
     {
      localStorage.setItem('Product',JSON.stringify(value));
    }

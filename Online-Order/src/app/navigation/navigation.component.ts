@@ -56,7 +56,7 @@ export class NavigationComponent {
     }
     else
     {
-      this.router.navigate(['/read-clientorder']);
+      this.router.navigate(['/vendor-orders']);
     }
   }
 

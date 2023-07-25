@@ -42,11 +42,11 @@
                         <tbody>
                             <tr *ngFor="let productItem of products | paginate:{itemsPerPage: noOfRows, currentPage:p}">
                             <td>{{productItem.productName}}</td>
-                            <td>{{productItem.price  | currency:'R '}}</td>
+                            <td>{{productItem.price.valueOf()  | currency:'R '}}</td>
                             <td>{{productItem.stock}}</td>
                             <td class = "icon-adjust">
-                                <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                <a [routerLink]="" style="cursor: pointer;" class="edit" (click)="editProduct(productItem)" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                <a [routerLink]="" style="cursor: pointer;" class="delete" (click)="deleteProduct(productItem)" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                             </td>  
                         </tr>
                         </tbody>

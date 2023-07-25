@@ -44,9 +44,10 @@ export class CreateProductComponent {
   {
       //Additional Validation can be added here
       this.productform = fbuilder.group({
+        productID: 0,
         productName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-        price: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-        stock: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+        price: new FormControl ('',[Validators.required]),
+        stock: new FormControl ('',[Validators.required]),
       });
   }
 
@@ -58,10 +59,77 @@ export class CreateProductComponent {
 
   addproduct()
   {
-    this.submitted = true;
+    this.omsservicedbservice.readProducts()
+      .subscribe(response => {
+        this.products = response;
+
+      this.submitted = true;
+      if (this.productform.valid == true)
+      {
+        //No duplicate description fro client order
+        if(this.products.find(x => x.productName.toLowerCase() == this.productform.get('productName')?.value.toLowerCase()) != undefined )
+        {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Duplicate Product Name',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
+        }
+
+
+        if (this.products.find(x => x.productName.toLowerCase() == this.productform.get('productName')?.value.toLowerCase()) == undefined )
+        {
+          if (this.productform.get('stock').value < 0 || this.productform.get('price').value < 0 )
+          {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Values cannot be less than 0',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            })
+          }
+          else
+          {    
+            Swal.fire({
+              icon: 'warning',
+              title: 'Are you sure you want to add this product?',
+              showDenyButton: true,
+              confirmButtonText: 'Yes',
+              denyButtonText: `No`,
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.omsservicedbservice.createProducts(this.productform.value).subscribe();
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Product Added',
+                  confirmButtonText: 'OK',
+                  confirmButtonColor: '#077bff',
+                  allowOutsideClick: false,
+                  allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    this.router.navigate(['/read-products']).then(() => {
+                    });
+                  }
+                })   
+              }
+            })   
+          }
+        }
+      }
+    });
   }
 
   get f() { return this.productform.controls!; }
+
 
     //Check no white spaces
     public noWhitespaceValidator(someFormControl: FormControl) 

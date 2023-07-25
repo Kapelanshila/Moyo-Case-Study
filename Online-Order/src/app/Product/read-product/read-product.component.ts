@@ -21,13 +21,13 @@ import { Order } from 'src/app/shared/Order';
   styleUrls: ['./read-product.component.css']
 })
 export class ReadProductComponent {
-  products:any[] = [];
+  products:Product[] = [];
   config: any; 
   noOfRows = 10;
   p: number = 1;
   cartItems:Cart[] = []; 
   countproducts = 0;
-
+  orders:any[] = [];
   constructor(public tokenStorageService: TokenStorageService,fbuilder: FormBuilder, private router: Router,private authenticationService:AuthenticationService, private omsservicedbservice:OMSServicedbService , private pathService:PathService, private location:Location)
   {}
 
@@ -40,14 +40,74 @@ export class ReadProductComponent {
     //Get asset from api
     this.omsservicedbservice.readProducts()
     .subscribe(response => {
-      this.products = response;
-
-        })
+      this.products = response;})
   }
 
   addProduct()
   {
     this.router.navigate(['/create-product']);
+  }
+
+  editProduct(selectedProduct:Product)
+  {
+    this.omsservicedbservice.clearProduct()
+    this.omsservicedbservice.setProduct(selectedProduct)
+
+    this.router.navigate(['/update-product']);
+  }
+
+  deleteProduct(selectedProduct:Product)
+  {
+    this.omsservicedbservice.readOrderLines()
+    .subscribe(response => {
+      this.orders = response;
+      
+      if (this.orders.find(x => x.productID == selectedProduct.productID))
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Cannot Be Deleted',
+          text: 'Product associated to orders',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Are you sure you want to delete this product?',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.omsservicedbservice.deleteProduct(selectedProduct).subscribe();
+            Swal.fire({
+              icon: 'success',
+              title: 'Product Deleted',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  this.products = [];
+                  this.omsservicedbservice.readProducts()
+                  .subscribe(response => {
+                    this.products = response;
+                  })
+              }
+            })   
+          }
+        })   
+      }
+    })
   }
 
   searchProducts()

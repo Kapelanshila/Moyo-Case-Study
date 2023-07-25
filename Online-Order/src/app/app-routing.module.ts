@@ -20,7 +20,7 @@ const routes: Routes = [{ path: 'login', component: LoginComponent},
 { path: 'read-products', component: ReadProductComponent, canActivate: [vendorAuthGuard] },
 { path: 'create-product', component: CreateProductComponent, canActivate: [vendorAuthGuard] },
 { path: 'update-product', component: UpdateProductComponent, canActivate: [vendorAuthGuard] },
-{ path: 'vendor-orders', component: UpdateProductComponent, canActivate: [vendorAuthGuard] },
+{ path: 'vendor-orders', component: VendorOrdersComponent, canActivate: [vendorAuthGuard] },
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({

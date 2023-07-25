@@ -39,9 +39,33 @@
             <a class="nav-link" routerLink="/client-orders">Orders</a>
             </li>
             <li class="nav-item d-sm-block d-md-none">
-            <a class="nav-link" routerLink="/logout">Logout</a>
+            <a class="nav-link" routerLink="/login">Logout</a>
             </li>
         </ng-container>
+          <ng-container *ngIf="account.role == 'Client'">
+            <ng-container *ngIf="path != '/client-portal'">
+                <li class="nav-item d-sm-block d-md-none">
+                    <a class="nav-link" routerLink="/client-portal">Browse Products</a>
+                </li>
+            </ng-container>
+            <li class="nav-item d-sm-block d-md-none">
+            <a class="nav-link" routerLink="/client-orders">Orders</a>
+            </li>
+            <li class="nav-item d-sm-block d-md-none">
+            <a class="nav-link" routerLink="/login">Logout</a>
+            </li>
+        </ng-container>
+        <ng-container *ngIf="account.role == 'Vendor'">
+          <li class="nav-item d-sm-block d-md-none">
+              <a class="nav-link" routerLink="/read-products">Products</a>
+          </li>
+          <li class="nav-item d-sm-block d-md-none">
+          <a class="nav-link" routerLink="/vendor-orders">Orders</a>
+          </li>
+          <li class="nav-item d-sm-block d-md-none">
+          <a class="nav-link" routerLink="/login">Logout</a>
+          </li>
+      </ng-container>
         </ul>
     </div>
 </nav>
@@ -76,6 +100,24 @@
         </ng-container>
 
 
+        <ng-container *ngIf="account.role == 'Vendor'">
+            <a  data-toggle="collapse" aria-expanded="false"
+              class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover clickable-link"
+              (click)="products()">
+              <div class="d-flex w-100 justify-content-start align-items-center">
+                <span style="padding-right: 25px;" class="fa fa-archive fa-fw mr-3"></span>
+                <span class="menu-collapsed">Products</span>
+              </div>
+            </a>
+            <a  data-toggle="collapse" aria-expanded="false"
+            class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover clickable-link"
+            (click)="orders()">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+              <span style="padding-right: 25px;" class="fa fa-truck fa-fw mr-3"></span>
+              <span class="menu-collapsed">Orders</span>
+            </div>
+          </a>
+        </ng-container>
 
         <a routerLink="/login" (click)="logout()"  data-toggle="collapse" aria-expanded="false"
           class="list-group-item list-group-item-action flex-column align-items-start darken-on-hover"

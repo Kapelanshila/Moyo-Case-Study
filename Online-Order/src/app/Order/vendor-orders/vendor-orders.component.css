@@ -154,3 +154,8 @@
         margin-top: 10px;
       }
 
+/* Add this CSS code to your stylesheets */
+.show-label {
+    margin: 0;
+    padding: 0;
+  }

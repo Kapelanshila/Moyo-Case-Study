@@ -1,0 +1,34 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="product-card">
+        <form class="form-user"  [formGroup]="productform" (ngSubmit)="addproduct()">
+            <h4 class="card-title">Add product Item </h4>
+            <hr>
+            <label>Product Name
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['productName'].errors?.['required'] || f['productName'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a product name</span>
+            </div>
+            <input maxlength="32" type="text" class="form-control" formControlName="productName" placeholder="Enter product Name" required>
+            <br>
+
+            <label>Price
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['price'].errors?.['required']" class="text-danger">Please enter the price of the product</span>
+            </div>
+            <input min="1"  type="number" class="form-control" formControlName="price" placeholder="Enter product stock" required>
+            <br>
+
+            <label>Stock
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['stock'].errors?.['required']" class="text-danger" >Please enter the stock on hand</span>
+            </div>
+            <input min="1"  type="number" class="form-control" formControlName="stock" placeholder="Enter product stock" required>
+            <br>    
+            <input type="submit" class="btn" value="Save">
+        </form>
+        <div class="text-center"></div>
+    </div>
+</div>

@@ -153,4 +153,9 @@
         margin-left: 0px;
         margin-top: 10px;
       }
-
+      table.table td a.edit {
+        color: #5961f9;
+    }
+    table.table td a.delete {
+        color: #E34724;
+    }

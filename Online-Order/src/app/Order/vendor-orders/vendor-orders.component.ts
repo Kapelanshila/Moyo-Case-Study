@@ -16,14 +16,15 @@ import { ProductVM } from 'src/app/shared/ProductVM';
 import { Order } from 'src/app/shared/Order';
 
 @Component({
-  selector: 'app-read-orders',
-  templateUrl: './read-orders.component.html',
-  styleUrls: ['./read-orders.component.css'],
+  selector: 'app-vendor-orders',
+  templateUrl: './vendor-orders.component.html',
+  styleUrls: ['./vendor-orders.component.css']
 })
-export class ReadOrdersComponent {
+export class VendorOrdersComponent {
   orders: any[] = [];
   orderlines: any[] = [];
   orderItems: any[] = [];
+  users: any[] = [];
   orderItem!: OrderVM;
   config: any;
   noOfRows = 10;
@@ -75,12 +76,15 @@ export class ReadOrdersComponent {
     }
     // Get orderlines from API
     this.omsservicedbservice
-    .readClientOrderLines(this.account.userID.toString())
+    .readOrderLines()
     .subscribe((response) => {
       this.orderlines = response;
   
       this.omsservicedbservice.readOrders().subscribe((response) => {
         this.orders = response;
+
+        this.omsservicedbservice.readUsers().subscribe((response) => {
+          this.users = response;
   
         this.orderlines.forEach((element) => {
           const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
@@ -95,12 +99,13 @@ export class ReadOrdersComponent {
               products: [],
               Quantity: 0,
               userID: 0,
-                           user:''
+              user:  this.users.find((x) => x.userID === element.userID)!.userName,
             };
             this.orderItems.push(this.orderItem);
           }
         });
       });
+    });
     });
   }
 
@@ -126,7 +131,7 @@ export class ReadOrdersComponent {
       this.omsservicedbservice.readProducts().subscribe((response) => {
         this.products = response;
     
-        this.omsservicedbservice.readClientOrderLines(this.account.userID.toString()).subscribe((response) => {
+        this.omsservicedbservice.readOrderLines().subscribe((response) => {
           this.orderlines = response;
     
           this.omsservicedbservice.readOrders().subscribe((response) => {
@@ -174,32 +179,42 @@ export class ReadOrdersComponent {
     this.orderItems = [];
     if (this.query == '') {
       this.omsservicedbservice
-      .readClientOrderLines(this.account.userID.toString())
+      .readOrderLines()
       .subscribe((response) => {
         this.orderlines = response;
     
-        this.omsservicedbservice.readOrders().subscribe((response) => {
-          this.orders = response;
-    
-          this.orderlines.forEach((element) => {
-            const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
-    
-            if (!existingOrderItem) {
-              this.orderItem = {
-                orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
-                description: this.orders.find((x) => x.orderID === element.orderID)!.description,
-                date: this.orders.find((x) => x.orderID === element.orderID)!.date,
-                orderLineID: element.orderLineID,
-                productID: 0,
-                products: [],
-                Quantity: 0,
-                userID: 0,
-                user:''
-              };
-              this.orderItems.push(this.orderItem);
-            }
-          });
+ this.omsservicedbservice
+    .readOrderLines()
+    .subscribe((response) => {
+      this.orderlines = response;
+  
+      this.omsservicedbservice.readOrders().subscribe((response) => {
+        this.orders = response;
+
+        this.omsservicedbservice.readUsers().subscribe((response) => {
+          this.users = response;
+  
+        this.orderlines.forEach((element) => {
+          const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
+  
+          if (!existingOrderItem) {
+            this.orderItem = {
+              orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
+              description: this.orders.find((x) => x.orderID === element.orderID)!.description,
+              date: this.orders.find((x) => x.orderID === element.orderID)!.date,
+              orderLineID: element.orderLineID,
+              productID: 0,
+              products: [],
+              Quantity: 0,
+              userID: 0,
+              user:  this.users.find((x) => x.userID === element.userID)!.userName,
+            };
+            this.orderItems.push(this.orderItem);
+          }
         });
+      });
+    });
+    });
       });
     } else {
       if (this.query.replace(/\s/g, '').length == 0 || this.noWhitespaceValidator(this.query)) {
@@ -213,31 +228,41 @@ export class ReadOrdersComponent {
         }).then((result) => {
           if (result.isConfirmed) {
             this.omsservicedbservice
-            .readClientOrderLines(this.account.userID.toString())
+            .readOrderLines()
             .subscribe((response) => {
               this.orderlines = response;
           
-              this.omsservicedbservice.readOrders().subscribe((response) => {
-                this.orders = response;
+              this.omsservicedbservice
+              .readOrderLines()
+              .subscribe((response) => {
+                this.orderlines = response;
+            
+                this.omsservicedbservice.readOrders().subscribe((response) => {
+                  this.orders = response;
           
-                this.orderlines.forEach((element) => {
-                  const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
-          
-                  if (!existingOrderItem) {
-                    this.orderItem = {
-                      orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
-                      description: this.orders.find((x) => x.orderID === element.orderID)!.description,
-                      date: this.orders.find((x) => x.orderID === element.orderID)!.date,
-                      orderLineID: element.orderLineID,
-                      productID: 0,
-                      products: [],
-                      Quantity: 0,
-                      userID: 0,
-                user:''
-                    };
-                    this.orderItems.push(this.orderItem);
-                  }
+                  this.omsservicedbservice.readUsers().subscribe((response) => {
+                    this.users = response;
+            
+                  this.orderlines.forEach((element) => {
+                    const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
+            
+                    if (!existingOrderItem) {
+                      this.orderItem = {
+                        orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
+                        description: this.orders.find((x) => x.orderID === element.orderID)!.description,
+                        date: this.orders.find((x) => x.orderID === element.orderID)!.date,
+                        orderLineID: element.orderLineID,
+                        productID: 0,
+                        products: [],
+                        Quantity: 0,
+                        userID: 0,
+                        user:  this.users.find((x) => x.userID === element.userID)!.userName,
+                      };
+                      this.orderItems.push(this.orderItem);
+                    }
+                  });
                 });
+              });
               });
             });
           }
@@ -248,6 +273,9 @@ export class ReadOrdersComponent {
 
             this.omsservicedbservice.readOrders().subscribe((response) => {
               this.orders = response;
+        
+              this.omsservicedbservice.readUsers().subscribe((response) => {
+                this.users = response;
         
               this.orderlines.forEach((element) => {
                 const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
@@ -262,11 +290,12 @@ export class ReadOrdersComponent {
                     products: [],
                     Quantity: 0,
                     userID: 0,
-                    user:''
+                    user:  this.users.find((x) => x.userID === element.userID)!.userName,
                   };
                   this.orderItems.push(this.orderItem);
                 }
               });
+            });
             });
 
             if (this.orderlines.length == 0) {
@@ -281,7 +310,7 @@ export class ReadOrdersComponent {
                 if (result.isConfirmed) {
                   // Get orderlines from API
                   this.omsservicedbservice
-                  .readClientOrderLines(this.account.userID.toString())
+                  .readOrderLines()
                   .subscribe((response) => {
                     this.orderlines = response;
                 
@@ -290,22 +319,29 @@ export class ReadOrdersComponent {
                 
                       this.orderlines.forEach((element) => {
                         const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
-                
-                        if (!existingOrderItem) {
-                          this.orderItem = {
-                            orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
-                            description: this.orders.find((x) => x.orderID === element.orderID)!.description,
-                            date: this.orders.find((x) => x.orderID === element.orderID)!.date,
-                            orderLineID: element.orderLineID,
-                            productID: 0,
-                            products: [],
-                            Quantity: 0,
-                            userID: 0,
-                            user:''
-                          };
-                          this.orderItems.push(this.orderItem);
-                        }
+                        this.omsservicedbservice.readUsers().subscribe((response) => {
+                          this.users = response;
+                  
+                        this.orderlines.forEach((element) => {
+                          const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
+                  
+                          if (!existingOrderItem) {
+                            this.orderItem = {
+                              orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
+                              description: this.orders.find((x) => x.orderID === element.orderID)!.description,
+                              date: this.orders.find((x) => x.orderID === element.orderID)!.date,
+                              orderLineID: element.orderLineID,
+                              productID: 0,
+                              products: [],
+                              Quantity: 0,
+                              userID: 0,
+                              user:  this.users.find((x) => x.userID === element.userID)!.userName,
+                            };
+                            this.orderItems.push(this.orderItem);
+                          }
+                        });
                       });
+                    });
                     });
                   });
                 }

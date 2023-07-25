@@ -93,7 +93,8 @@ export class CreateOrdersComponent {
           productID:0,
           Quantity:0,
           userID:this.omsservicedbservice.getAccount().userID,
-          products:this.cart
+          products:this.cart,
+          user:''
         }
 
         Swal.fire({

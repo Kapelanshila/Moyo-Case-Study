@@ -95,6 +95,7 @@ export class ReadOrdersComponent {
               products: [],
               Quantity: 0,
               userID: 0,
+                           user:''
             };
             this.orderItems.push(this.orderItem);
           }
@@ -193,6 +194,7 @@ export class ReadOrdersComponent {
                 products: [],
                 Quantity: 0,
                 userID: 0,
+                user:''
               };
               this.orderItems.push(this.orderItem);
             }
@@ -231,6 +233,7 @@ export class ReadOrdersComponent {
                       products: [],
                       Quantity: 0,
                       userID: 0,
+                user:''
                     };
                     this.orderItems.push(this.orderItem);
                   }
@@ -259,6 +262,7 @@ export class ReadOrdersComponent {
                     products: [],
                     Quantity: 0,
                     userID: 0,
+                    user:''
                   };
                   this.orderItems.push(this.orderItem);
                 }
@@ -297,6 +301,7 @@ export class ReadOrdersComponent {
                             products: [],
                             Quantity: 0,
                             userID: 0,
+                            user:''
                           };
                           this.orderItems.push(this.orderItem);
                         }

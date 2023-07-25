@@ -30,12 +30,13 @@
                     <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
+                                <th style="width: 40%;">User</th>
                                 <th style="width: 40%;">Description</th>
                                 <th style="width: 40%;">Date Placed</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let orderItem of orderItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                            <td>{{orderItem.description}}</td>
+                            <td>{{orderItem.user}}</td>
                             <td>{{orderItem.date | dateconfig}} {{orderItem.date | time}}</td>
                             <td class = "icon-adjust">
                                 <a [routerLink]="" style="cursor: pointer;" class="viewOrder" title="View Order" data-toggle="tooltip">

@@ -9,4 +9,5 @@ export interface OrderVM {
     Quantity: Number,
     products: Product[],
     description: String 
+    user:String;
 }

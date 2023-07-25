@@ -24,6 +24,7 @@ export class VendorOrdersComponent {
   orders: any[] = [];
   orderlines: any[] = [];
   orderItems: any[] = [];
+  users: any[] = [];
   orderItem!: OrderVM;
   config: any;
   noOfRows = 10;
@@ -81,6 +82,9 @@ export class VendorOrdersComponent {
   
       this.omsservicedbservice.readOrders().subscribe((response) => {
         this.orders = response;
+
+        this.omsservicedbservice.readUsers().subscribe((response) => {
+          this.users = response;
   
         this.orderlines.forEach((element) => {
           const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
@@ -95,11 +99,13 @@ export class VendorOrdersComponent {
               products: [],
               Quantity: 0,
               userID: 0,
+              user:  this.users.find((x) => x.userID === element.userID)!.userName,
             };
             this.orderItems.push(this.orderItem);
           }
         });
       });
+    });
     });
   }
 
@@ -177,27 +183,38 @@ export class VendorOrdersComponent {
       .subscribe((response) => {
         this.orderlines = response;
     
-        this.omsservicedbservice.readOrders().subscribe((response) => {
-          this.orders = response;
-    
-          this.orderlines.forEach((element) => {
-            const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
-    
-            if (!existingOrderItem) {
-              this.orderItem = {
-                orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
-                description: this.orders.find((x) => x.orderID === element.orderID)!.description,
-                date: this.orders.find((x) => x.orderID === element.orderID)!.date,
-                orderLineID: element.orderLineID,
-                productID: 0,
-                products: [],
-                Quantity: 0,
-                userID: 0,
-              };
-              this.orderItems.push(this.orderItem);
-            }
-          });
+ this.omsservicedbservice
+    .readOrderLines()
+    .subscribe((response) => {
+      this.orderlines = response;
+  
+      this.omsservicedbservice.readOrders().subscribe((response) => {
+        this.orders = response;
+
+        this.omsservicedbservice.readUsers().subscribe((response) => {
+          this.users = response;
+  
+        this.orderlines.forEach((element) => {
+          const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
+  
+          if (!existingOrderItem) {
+            this.orderItem = {
+              orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
+              description: this.orders.find((x) => x.orderID === element.orderID)!.description,
+              date: this.orders.find((x) => x.orderID === element.orderID)!.date,
+              orderLineID: element.orderLineID,
+              productID: 0,
+              products: [],
+              Quantity: 0,
+              userID: 0,
+              user:  this.users.find((x) => x.userID === element.userID)!.userName,
+            };
+            this.orderItems.push(this.orderItem);
+          }
         });
+      });
+    });
+    });
       });
     } else {
       if (this.query.replace(/\s/g, '').length == 0 || this.noWhitespaceValidator(this.query)) {
@@ -215,26 +232,37 @@ export class VendorOrdersComponent {
             .subscribe((response) => {
               this.orderlines = response;
           
-              this.omsservicedbservice.readOrders().subscribe((response) => {
-                this.orders = response;
+              this.omsservicedbservice
+              .readOrderLines()
+              .subscribe((response) => {
+                this.orderlines = response;
+            
+                this.omsservicedbservice.readOrders().subscribe((response) => {
+                  this.orders = response;
           
-                this.orderlines.forEach((element) => {
-                  const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
-          
-                  if (!existingOrderItem) {
-                    this.orderItem = {
-                      orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
-                      description: this.orders.find((x) => x.orderID === element.orderID)!.description,
-                      date: this.orders.find((x) => x.orderID === element.orderID)!.date,
-                      orderLineID: element.orderLineID,
-                      productID: 0,
-                      products: [],
-                      Quantity: 0,
-                      userID: 0,
-                    };
-                    this.orderItems.push(this.orderItem);
-                  }
+                  this.omsservicedbservice.readUsers().subscribe((response) => {
+                    this.users = response;
+            
+                  this.orderlines.forEach((element) => {
+                    const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
+            
+                    if (!existingOrderItem) {
+                      this.orderItem = {
+                        orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
+                        description: this.orders.find((x) => x.orderID === element.orderID)!.description,
+                        date: this.orders.find((x) => x.orderID === element.orderID)!.date,
+                        orderLineID: element.orderLineID,
+                        productID: 0,
+                        products: [],
+                        Quantity: 0,
+                        userID: 0,
+                        user:  this.users.find((x) => x.userID === element.userID)!.userName,
+                      };
+                      this.orderItems.push(this.orderItem);
+                    }
+                  });
                 });
+              });
               });
             });
           }
@@ -245,6 +273,9 @@ export class VendorOrdersComponent {
 
             this.omsservicedbservice.readOrders().subscribe((response) => {
               this.orders = response;
+        
+              this.omsservicedbservice.readUsers().subscribe((response) => {
+                this.users = response;
         
               this.orderlines.forEach((element) => {
                 const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
@@ -259,10 +290,12 @@ export class VendorOrdersComponent {
                     products: [],
                     Quantity: 0,
                     userID: 0,
+                    user:  this.users.find((x) => x.userID === element.userID)!.userName,
                   };
                   this.orderItems.push(this.orderItem);
                 }
               });
+            });
             });
 
             if (this.orderlines.length == 0) {
@@ -286,21 +319,29 @@ export class VendorOrdersComponent {
                 
                       this.orderlines.forEach((element) => {
                         const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
-                
-                        if (!existingOrderItem) {
-                          this.orderItem = {
-                            orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
-                            description: this.orders.find((x) => x.orderID === element.orderID)!.description,
-                            date: this.orders.find((x) => x.orderID === element.orderID)!.date,
-                            orderLineID: element.orderLineID,
-                            productID: 0,
-                            products: [],
-                            Quantity: 0,
-                            userID: 0,
-                          };
-                          this.orderItems.push(this.orderItem);
-                        }
+                        this.omsservicedbservice.readUsers().subscribe((response) => {
+                          this.users = response;
+                  
+                        this.orderlines.forEach((element) => {
+                          const existingOrderItem = this.orderItems.find((x) => x.orderID === element.orderID);
+                  
+                          if (!existingOrderItem) {
+                            this.orderItem = {
+                              orderID: this.orders.find((x) => x.orderID === element.orderID)!.orderID,
+                              description: this.orders.find((x) => x.orderID === element.orderID)!.description,
+                              date: this.orders.find((x) => x.orderID === element.orderID)!.date,
+                              orderLineID: element.orderLineID,
+                              productID: 0,
+                              products: [],
+                              Quantity: 0,
+                              userID: 0,
+                              user:  this.users.find((x) => x.userID === element.userID)!.userName,
+                            };
+                            this.orderItems.push(this.orderItem);
+                          }
+                        });
                       });
+                    });
                     });
                   });
                 }

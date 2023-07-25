@@ -8,6 +8,7 @@ import { UserRole } from '../shared/UserRole';
 import { Product } from '../shared/Product';
 import { Cart } from '../shared/Cart';
 import { Order } from '../shared/Order';
+import { ProductVM } from '../shared/ProductVM';
 
 @Injectable({
   providedIn: 'root'
@@ -84,10 +85,10 @@ export class OMSServicedbService {
   } 
 
   
-  setCart(value: Product) {
+  setCart(value: Cart) {
     this.cartItems = JSON.parse(localStorage.getItem('Cart')!) || [];
   
-    this.cartItem = this.cartItems.find(x => x.productID === value.productID);
+    this.cartItem = this.cartItems.find(x => x.productID == value.productID);
   
     if (this.cartItem !== undefined) {
       this.cartItem.quantity++; // Increment the quantity if the product is found
@@ -98,11 +99,45 @@ export class OMSServicedbService {
         stock: value.stock,
         quantity: 1,
         productName: value.productName,
+        orderID: 0,
       };
       this.cartItems.push(this.newcartItem);
     }
   
     localStorage.setItem('Cart', JSON.stringify(this.cartItems));
+  }
+
+  updateCart(value: Cart) {
+    this.cartItems = JSON.parse(localStorage.getItem('Cart')!) || [];
+    this.cartItem = this.cartItems.find(x => x.productID === value.productID);
+  
+    if (this.cartItem !== undefined) {
+
+      this.cartItem.quantity = value.quantity; 
+
+    } else {
+      this.newcartItem = {
+        productID: value.productID,
+        price: value.price,
+        stock: value.stock,
+        quantity: 1,
+        productName: value.productName,
+        orderID: 0,
+      };
+      this.cartItems.push(this.newcartItem);
+    }
+  
+    localStorage.setItem('Cart', JSON.stringify(this.cartItems));
+  }
+
+  removeFromCart(productItem: Cart) {
+    const cartItems: Cart[] = JSON.parse(localStorage.getItem('Cart')!) || [];
+    const index = cartItems.findIndex(item => item.productID === productItem.productID);
+
+    if (index !== -1) {
+      cartItems.splice(index, 1);
+      localStorage.setItem('Cart', JSON.stringify(cartItems));
+    }
   }
 
   //Returns selected Cart

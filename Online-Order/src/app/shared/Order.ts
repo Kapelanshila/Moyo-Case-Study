@@ -1,5 +1,5 @@
 export interface Order {
     productID: Number
-    description: Number 
+    description: String 
     date: Date
 }

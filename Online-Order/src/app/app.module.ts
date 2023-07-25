@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { ReadOrdersComponent } from './Order/read-orders/read-orders.component';
 import { DatePipe } from './pipes/date.pipe';
+import { CreateOrdersComponent } from './Order/create-orders/create-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { DatePipe } from './pipes/date.pipe';
     ClientPortalComponent,
     NavigationComponent,
     ReadOrdersComponent,
-    DatePipe
+    DatePipe,
+    CreateOrdersComponent
   ],
   imports: [
     BrowserModule,

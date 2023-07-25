@@ -4,4 +4,5 @@ export interface Cart {
     price: Number
     stock: Number
     quantity: number
+    orderID: Number
 }

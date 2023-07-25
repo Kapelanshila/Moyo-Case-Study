@@ -33,7 +33,6 @@ export class ClientPortalComponent {
   {
     this.pathService.clearPath();
     this.pathService.setPath('/client-portal');
-    this.omsservicedbservice.clearCart();
     //Get asset from api
     this.omsservicedbservice.readProducts()
     .subscribe(response => {
@@ -124,7 +123,7 @@ export class ClientPortalComponent {
   
    }
 
-  addToCart(selectedProduct:Product)
+  addToCart(selectedProduct:Cart)
   {
         Swal.fire({
           icon: 'warning',

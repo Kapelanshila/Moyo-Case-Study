@@ -8,5 +8,5 @@ export interface OrderVM {
     userID:Number,
     Quantity: Number,
     products: Product[],
-    description: Number 
+    description: String 
 }

@@ -15,8 +15,8 @@
                                 </div>
                             </div>
                             <div class="button-container">
-                                <button style="margin-top: 0;" [disabled]="enabled" class="custom-add-button" style="max-width: 120px;" type="button" class="btn">
-                                  <i class="fa fa-plus"></i> Add New
+                                <button style="margin-top: 0;" [disabled]="enabled" (click)="placeOrder()" class="custom-add-button" style="max-width: 130px;" type="button" class="btn">
+                                  <i class="fa fa-plus"></i> Place Order
                                 </button>
                                 <div class="cart-text" *ngIf="countproducts; else emptyCartText">
                                   Items in Cart

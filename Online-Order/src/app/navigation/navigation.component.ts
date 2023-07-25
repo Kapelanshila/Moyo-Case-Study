@@ -30,7 +30,6 @@ export class NavigationComponent {
   ngOnInit(): void 
   {
     this.account = this.omsservicedbservice.getAccount();
-    console.log(this.account.role)
     this.path=  this.pathService.getPath();
   }
 

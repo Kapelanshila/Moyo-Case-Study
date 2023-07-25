@@ -18,6 +18,9 @@ import { DatePipe } from './pipes/date.pipe';
 import { TimePipe } from './pipes/time.pipe';
 import { CreateOrdersComponent } from './Order/create-orders/create-orders.component';
 import { UpdateOrderComponent } from './Order/update-order/update-order.component';
+import { CreateProductComponent } from './Product/create-product/create-product.component';
+import { UpdateProductComponent } from './Product/update-product/update-product.component';
+import { ReadProductComponent } from './Product/read-product/read-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,10 @@ import { UpdateOrderComponent } from './Order/update-order/update-order.componen
     DatePipe,
     CreateOrdersComponent,
     UpdateOrderComponent,
-    TimePipe
+    TimePipe,
+    CreateProductComponent,
+    UpdateProductComponent,
+    ReadProductComponent
   ],
   imports: [
     BrowserModule,

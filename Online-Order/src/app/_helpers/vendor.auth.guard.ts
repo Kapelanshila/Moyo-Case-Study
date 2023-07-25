@@ -21,7 +21,7 @@ export class vendorAuthGuard implements CanActivate {
       this.account = this.oms.getAccount();
       if (this.account != null)
       {
-        if (this.tokenStorageService.getToken != undefined && (this.account.role == "Client"))
+        if (this.tokenStorageService.getToken != undefined && (this.account.role == "Vndor"))
         {
           return true;
         }

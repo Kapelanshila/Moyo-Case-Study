@@ -7,7 +7,6 @@
     overflow-x: hidden;
     }
 
-    
     .table-responsive {
         margin: 5% 0;
         box-shadow: 0 30px 30px rgba(0, 0, 0, 0.292);
@@ -72,11 +71,11 @@
         display: inline-block;
         margin: 0 5px;
     }
-    table.table td a.addToCart {
+    table.table td a.viewOrder {
         color:#5961f9;
     }
-    table.table td a.delete {
-        color: #E34724;
+    table.table td a.editOrder {
+        color: #353535;
     }
     table.table td i {
         font-size: 19px;
@@ -106,5 +105,52 @@
     {
         background:#077bff;
     }
-    
-    
+    .modal
+{
+  background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) )  
+}
+
+.modal-content {
+    -ms-transform: translate(0,50%);
+    -moz-transform: translate(0,50%);
+    -webkit-transform: translate(0,50%);
+    transform: translate(0,50%);
+    width:100%;
+  }
+  .custom-icon {
+    font-size: 16px; /* Set the desired font size here */
+  }
+
+  .btn{
+    border: none;
+    margin: 0 13px;
+    margin-top: 1%;
+    color: white;
+    background-color: #5961f9;
+  }
+  .custom-add-button {
+    margin-top: 10px; /* Adjust the top margin as needed */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    padding-left: 0; /* Remove left padding */
+    padding-right: 0; /* Remove right padding */
+  }
+  .btn:hover {
+    background-color: #4046b9;  }
+    .button-container {
+        display: inline-flex;
+        align-items: center;
+        padding: 0;
+      }
+      
+      .custom-add-button {
+        float: left;
+      }
+      
+      .cart-text {
+        font-size: 14px;
+        color: rgb(204, 0, 255);
+        margin-left: 0px;
+        margin-top: 10px;
+      }
+      

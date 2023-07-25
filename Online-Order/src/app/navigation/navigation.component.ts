@@ -30,7 +30,6 @@ export class NavigationComponent {
   ngOnInit(): void 
   {
     this.account = this.omsservicedbservice.getAccount();
-    console.log(this.account.role)
     this.path=  this.pathService.getPath();
   }
 
@@ -49,11 +48,23 @@ export class NavigationComponent {
     this.authenticationService.logout();
   }
 
-  clientorder()
+  orders()
   {
-    if(this.account.role == 'Driver')
+    if(this.account.role == 'Client')
     {
-      this.router.navigate(['/completed-orders']);
+      this.router.navigate(['/client-orders']);
+    }
+    else
+    {
+      this.router.navigate(['/read-clientorder']);
+    }
+  }
+
+  products()
+  {
+    if(this.account.role == 'Client')
+    {
+      this.router.navigate(['/client-portal']);
     }
     else
     {

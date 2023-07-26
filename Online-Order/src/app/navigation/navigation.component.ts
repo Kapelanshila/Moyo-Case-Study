@@ -62,6 +62,13 @@ export class NavigationComponent {
 
   products()
   {
-    this.router.navigate(['/read-products']);
+    if(this.account.role == 'Client')
+    {
+      this.router.navigate(['/client-portal']);
+    }
+    else
+    {
+      this.router.navigate(['/read-products']);
+    }
   }
 }

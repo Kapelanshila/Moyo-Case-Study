@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX8TIb10mG0ynjtV33HoE+wAAAAACAAAAAAAQZgAAAAEAACAAAADX5hMw1eOiWDp8yuvL+TNr5yXLDRh5HZgaaXtAy1v8FAAAAAAOgAAAAAIAACAAAAANmnTSLNU8nngaFEwE5Vlu7vAaR4kMzWqAqhFtMITotIAAAAByrOCwyN5Vyd8ECR7b9kPP/9juFXutAc+hTbgCd+Kl252btV+WLyJZD2BWEX1UX3EXIx6/olCwZ3Uh56oORKITrZZqBcCuNBulkccy6pvX+EOKcigPF4lsCCxKTwEq4s7GfdTosRRfBb+X9o+oiHNJaP/jRXtBdzLs12nJhGkSX0AAAACAgh58FzMiZxqv/GYDkmzcRyfsbueK5o8eHCAxtP7okk0HFT/F63QCKiwv+gJMtvPHoaKwQLK5m/uz5RlniV9H</EncryptedPassword>
+    <History>True|2023-07-25T07:34:25.1601995Z;True|2023-07-25T09:13:25.8523612+02:00;True|2023-07-25T09:08:18.7194473+02:00;True|2023-07-25T04:40:24.8114649+02:00;True|2023-07-25T04:22:20.3295051+02:00;True|2023-07-25T04:14:40.6720789+02:00;True|2023-07-24T15:20:18.6674508+02:00;True|2023-07-24T07:30:35.6175145+02:00;True|2023-07-24T06:28:29.5765265+02:00;True|2023-07-24T06:26:33.5713604+02:00;True|2023-07-23T22:07:25.8346668+02:00;True|2023-07-23T21:45:27.8594588+02:00;True|2023-07-23T17:24:04.9542559+02:00;True|2023-07-23T17:22:17.2588383+02:00;True|2023-07-23T17:19:45.1912233+02:00;True|2023-07-23T17:16:17.7986809+02:00;True|2023-07-23T17:11:59.0533522+02:00;True|2023-07-23T17:00:20.1777518+02:00;True|2023-07-23T16:59:29.1826755+02:00;True|2023-07-23T16:58:20.5815387+02:00;True|2023-07-23T16:52:16.7462826+02:00;True|2023-07-23T16:48:25.6188577+02:00;True|2023-07-23T16:42:38.3537815+02:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:cmoyocasestudy.database.windows.net,1433%3bInitial Catalog=OnlineOrderDB%3bUser Id=moyo%40cmoyocasestudy%3bPassword=CaseStudy2023%40</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

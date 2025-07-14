@@ -1,4 +1,5 @@
-# Moyo Case Study - Online Order Solution
+# Moyo Case Study
+# 🛒 Online Order Solution
 
 This repository contains a simple online order solution developed for a Moyo interview. It includes:
 
@@ -53,22 +54,6 @@ By default, the API listens on `http://localhost:5000`. It exposes endpoints for
 - `PUT /api/orders/{id}` – Update an existing order.
 - `DELETE /api/orders/{id}` – Delete an order.
 
-## Testing
-
-### Front-end
-
-```bash
-cd Online-Order
-ng test
-ng e2e
-```
-
-### Back-end
-
-```bash
-cd OnlineOrderAPI
-dotnet test
-```
 
 ## Technologies Used
 
